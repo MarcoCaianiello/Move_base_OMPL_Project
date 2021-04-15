@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <arg name="map_file" default="$(find p3dx_move)/maps/hospital_partial_room_map.yaml" /> <!-- [hospital_small box_world_empty] -->
+
+  <!-- Run Map Server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  
+  <!-- Run AMCL -->
+  <include file="$(find p3dx_move)/launch/amcl.launch">
+    <arg name="initial_pose_x"   value="4.0" />
+	  <arg name="initial_pose_y"   value="38.0" />
+    <arg name="initial_pose_a"   value="-1.57" />
+  </include>
+
+  <!-- Run Move Base -->
+  <include file="$(find p3dx_move)/launch/move_base.launch"/>
+
+
+  <!-- mannequins move nodes -->
+  <node pkg="mannequin" type="mannequin" name="mann1" args="mann1"/>
+  <node pkg="mannequin" type="mannequin" name="mann2" args="mann2"/>
+  <node pkg="mannequin" type="mannequin" name="mann3" args="mann3"/>
+  <node pkg="mannequin" type="mannequin" name="mann4" args="mann4"/>
+  <node pkg="mannequin" type="mannequin" name="mann5" args="mann5"/>
+  <node pkg="mannequin" type="mannequin" name="mann6" args="mann6"/>
+  <node pkg="mannequin" type="mannequin" name="mann7" args="mann7"/>
+  
+  <!-- Notes 
+  - Hospital start point
+  <arg name="initial_pose_x"    value="4.0" />
+	<arg name="initial_pose_y"    value="38.0" />
+  <arg name="initial_pose_a"    value="-1.57" />
+
+  - Box World
+  <arg name="initial_pose_x"   value="1.5" />
+	<arg name="initial_pose_y"   value="2.5" />
+  <arg name="initial_pose_a"   value="0.0" />
+  -->
+  
+</launch>

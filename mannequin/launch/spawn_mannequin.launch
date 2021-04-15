@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<launch>
+<arg name="nas"   default=""/>
+<arg name="x"     default="4.0"/>
+<arg name="y"     default="4.0"/>
+<arg name="z"     default="0.0"/>
+<arg name="yaw"   default="0.0" />
+
+<arg name="name" default="mannequin_$(arg nas)"/>
+<!-- urdf xml robot description loaded on the Parameter Server-->  
+<group ns="$(arg nas)">
+  <param name="robot_description" command="$(find xacro)/xacro '$(find mannequin)/urdf/mannequin.xacro' prefix:=$(arg nas)" /> 
+  <param name="tf_prefix" value="$(arg nas)_tf" />
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="$(arg nas)_robot_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  	args="-urdf -model $(arg name) -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw) -param  /$(arg nas)/robot_description  -robot_namespace $(arg nas)"/>
+  	
+ <!-- <rosparam file="$(find mannequin)/config/mannequin.yaml" command="load"/> da creare-->
+  
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/joint_states" />
+  </node>
+  
+  </group>
+
+
+</launch>

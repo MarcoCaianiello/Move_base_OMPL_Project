@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find p3dx_move)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+  <!-- World Spawn -->
+  <include file="$(find hospital_world)/launch/hospital.launch">
+    <arg name="gzpose"      value="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
+    <arg name="gui"         value="true"/>
+    <arg name="debug"       value="false"/>
+  </include>
+
+  <!-- Robot Spawn -->
+  <include file="$(find p3dx_gazebo)/launch/p3dx.launch"> 
+	  <arg name="ns"    value="p3dx_1" />
+    <arg name="x"     value="4.0" />
+	  <arg name="y"     value="38.0" />
+    <arg name="yaw"   value="-1.57" />
+  </include>
+
+ <!-- mannequin Spawn -->
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann1" />
+	  <arg name="x"     value="13.0" />
+	  <arg name="y"     value="33.0" />
+    <arg name="yaw"   value="3.14" />
+  </include>
+  
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann2" />
+	  <arg name="x"     value="23.0" />
+	  <arg name="y"     value="33.0" />
+    <arg name="yaw"   value="1.57" />
+  </include>
+
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann3" />
+	  <arg name="x"     value="33.0" />
+	  <arg name="y"     value="33.0" />
+    <arg name="yaw"   value="0.0" />
+  </include> 
+
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann4" />
+	  <arg name="x"     value="33.0" />
+	  <arg name="y"     value="4.0" />
+    <arg name="yaw"   value="-1.57" />
+  </include> 
+
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann5" />
+	  <arg name="x"     value="25.0" />
+	  <arg name="y"     value="12.0" />
+    <arg name="yaw"   value="-1.57" />
+  </include> 
+
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann6" />
+	  <arg name="x"     value="10.0" />
+	  <arg name="y"     value="10.0" />
+    <arg name="yaw"   value="0.0" />
+  </include> 
+
+  <include file="$(find mannequin)/launch/spawn_mannequin.launch"> 
+	  <arg name="nas"   value="mann7" />
+	  <arg name="x"     value="3.0" />
+	  <arg name="y"     value="21.0" />
+    <arg name="yaw"   value="0.0" />
+  </include>
+  
+
+  <!-- Notes 
+  - Hospital start point
+  <arg name="x"     value="4.0" />
+	<arg name="y"     value="38.0" />
+  <arg name="yaw"   value="-1.57" />
+
+  - Box World
+  <arg name="x"     value="1.5" />
+	<arg name="y"     value="2.5" />
+  <arg name="yaw"   value="0.0" />
+  -->
+  
+</launch>
